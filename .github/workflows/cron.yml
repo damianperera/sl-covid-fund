@@ -20,7 +20,7 @@ jobs:
         architecture: 'x64' 
      - name: Scrape
        run: |
-        git checkout gh_pages
+        git checkout gh-pages
         pip install -r requirements.txt
         python scrape.py
         rm -rf .github
@@ -34,4 +34,4 @@ jobs:
        uses: ad-m/github-push-action@master
        with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: gh_pages
+        branch: gh-pages
