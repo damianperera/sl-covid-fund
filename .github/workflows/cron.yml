@@ -16,7 +16,11 @@ jobs:
         python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
         architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
      - name: Scrape
-       run: git checkout gh_pages && pip install -r requirements.txt && python scrape.py
+       run: |
+	git checkout gh_pages
+	pip install -r requirements.txt
+	python scrape.py
+	rm -rf .github
      - name: Commit files
        run: |
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
