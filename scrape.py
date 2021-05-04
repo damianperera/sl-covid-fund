@@ -25,5 +25,3 @@ with open('data.json', 'r+') as persistentFile:
 	persistentFile.seek(0)
 	json.dump(historicalData, persistentFile)
 	persistentFile.truncate()
-
-	
