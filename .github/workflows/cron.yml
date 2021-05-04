@@ -1,7 +1,10 @@
 name: Python Scraper
 on:
+  push:
+    branches:
+      - main
   schedule:
-  - cron: '* * * * *'
+    - cron: '* * * * *'
 
 jobs:
   stale:
