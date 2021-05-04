@@ -15,13 +15,19 @@ jobs:
        with:
         persist-credentials: false
         fetch-depth: 0
+        ref: 'gh-pages'
+    - uses: actions/checkout@v2
+       with:
+        persist-credentials: false
+        fetch-depth: 0
+        ref: 'main'
+        clean: false
      - uses: actions/setup-python@v2
        with:
         python-version: '3.x'
         architecture: 'x64' 
      - name: Scrape
        run: |
-        git fetch
         git restore -s gh-pages -SW -- data.json
         pip install -r requirements.txt
         python scrape.py
