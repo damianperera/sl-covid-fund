@@ -21,7 +21,7 @@ jobs:
         architecture: 'x64' 
      - name: Scrape
        run: |
-        git checkout gh-pages -- data.json
+        git restore -s gh-pages -SW -- data.json
         pip install -r requirements.txt
         python scrape.py
         rm -rf .github
