@@ -12,13 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
      - name: Checkout gh-pages
-       uses: actions/checkout@v2
+       uses: actions/checkout@v1
        with:
         persist-credentials: false
         fetch-depth: 0
         ref: 'gh-pages'
      - name: Checkout main
-       uses: actions/checkout@v2
+       uses: actions/checkout@v1
        with:
         persist-credentials: false
         fetch-depth: 0
