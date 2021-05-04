@@ -4,7 +4,8 @@ on:
     branches:
       - main
   schedule:
-    - cron: '* * * * *'
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '* * * * *'
 
 jobs:
   stale:
@@ -20,7 +21,7 @@ jobs:
         architecture: 'x64' 
      - name: Scrape
        run: |
-        git checkout gh-pages
+        git checkout gh-pages -- data.json
         pip install -r requirements.txt
         python scrape.py
         rm -rf .github
