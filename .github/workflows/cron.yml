@@ -1,7 +1,7 @@
 name: Python Scraper
 on:
   schedule:
-  - cron: "*/1 * * * *"
+  - cron: '* * * * *'
 
 jobs:
   stale:
