@@ -3,5 +3,8 @@
 
 Periodically updates [this file](https://damianperera.github.io/sl-covid-fund/data.json) with the amount of donations in the _COVID – 19 Healthcare and Social Security Fund_ bank account at a given point in time as reflected in the [Presidential Secretariat](https://www.presidentsoffice.gov.lk/index.php/covid-19-fund/) webpage.
 
+### Contributions
+Any and all contributions to improve this are welcome.
+
 ### Disclaimer
 This operates on the assumption that the fund value displayed on the [Presidential Secretariat](https://www.presidentsoffice.gov.lk/index.php/covid-19-fund/) webpage is updated regularly.
