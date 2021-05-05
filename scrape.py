@@ -4,7 +4,7 @@ import json
 from datetime import datetime, timezone
 
 # Execution time
-time = datetime.utcnow().strftime('%B %d %Y - %H:%M:%S UTC')
+time = datetime.now().isoformat()
 
 # Get fund value
 pageContent=requests.get('https://www.presidentsoffice.gov.lk/index.php/covid-19-fund/')
