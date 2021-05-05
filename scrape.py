@@ -3,6 +3,9 @@ from lxml import html
 import json
 from datetime import datetime, timezone
 
+# Execution time
+time = datetime.utcnow().strftime('%B %d %Y - %H:%M:%S UTC')
+
 # Get fund value
 pageContent=requests.get('https://www.presidentsoffice.gov.lk/index.php/covid-19-fund/')
 tree = html.fromstring(pageContent.content)
@@ -12,14 +15,18 @@ print('Fund value was LKR ', fundVal)
 with open('data.json', 'r+') as persistentFile:
 	# Load historical data
 	historicalData = json.load(persistentFile)
-	if not 'history' in historicalData:
-		historicalData['history'] = []
+	historicalData['lastUpdated'] = time
 
-	# Build latest data
 	data = {}
 	data['value'] = fundVal
-	data['time'] = datetime.utcnow().strftime('%B %d %Y - %H:%M:%S')
-	historicalData['history'].append(data)
+	data['time'] = time
+
+	if not 'history' in historicalData:
+		historicalData['history'] = []
+		historicalData['history'].append(data)
+	elif historicalData['history'][-1]['value'] != fundVal:
+		# Build latest data
+		historicalData['history'].append(data)
 
 	# Save
 	persistentFile.seek(0)
