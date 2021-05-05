@@ -33,7 +33,10 @@ jobs:
         pip install -r requirements.txt
         python scrape.py
      - name: Assemble deployment
-       run: rm -rf .github
+       run: |
+        rm -rf .github
+        rm scrape.py
+        rm requirements.txt
      - name: Commit changes
        run: |
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
