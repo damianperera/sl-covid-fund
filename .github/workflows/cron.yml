@@ -10,36 +10,37 @@ jobs:
   stale:
     runs-on: ubuntu-latest
     steps:
-     - name: Checkout gh-pages
+     - name: Checkout branch gh-pages
        uses: actions/checkout@v1
        with:
-        persist-credentials: false
         fetch-depth: 0
         ref: 'gh-pages'
-     - name: Checkout main
+     - name: Checkout branch main
        uses: actions/checkout@v1
        with:
-        persist-credentials: false
         fetch-depth: 0
         ref: 'main'
         clean: false
-     - uses: actions/setup-python@v2
+     - name: Setup Python 3
+       uses: actions/setup-python@v2
        with:
         python-version: '3.x'
         architecture: 'x64' 
+     - name: Load historical data
+       run: git restore -s gh-pages -SW -- data.json
      - name: Scrape
        run: |
-        git restore -s gh-pages -SW -- data.json
         pip install -r requirements.txt
         python scrape.py
-        rm -rf .github
-     - name: Commit files
+     - name: Assemble deployment
+       run: rm -rf .github
+     - name: Commit changes
        run: |
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
         git add .
         git commit -m "Updated data"
-     - name: Push changes
+     - name: Push to prod
        uses: ad-m/github-push-action@master
        with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
