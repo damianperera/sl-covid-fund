@@ -7,7 +7,7 @@ on:
     - cron:  '*/60 * * * *'
 
 jobs:
-  stale:
+  scrape:
     runs-on: ubuntu-latest
     steps:
      - name: Checkout branch gh-pages
