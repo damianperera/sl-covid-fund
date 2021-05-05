@@ -26,12 +26,20 @@ jobs:
        with:
         python-version: '3.x'
         architecture: 'x64' 
+     - name: Cache deps
+       uses: actions/cache@v2
+       with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          ${{ runner.os }}-
+     - name: Install deps
+       run: pip install -r requirements.txt
      - name: Load historical data
        run: git restore -s gh-pages -SW -- data.json
      - name: Scrape
-       run: |
-        pip install -r requirements.txt
-        python scrape.py
+       run: python scrape.py
      - name: Assemble deployment
        run: |
         rm -rf .github
