@@ -1,13 +1,14 @@
 import requests
 from lxml import html
 import json
-from datetime import datetime, timezone
+from datetime import datetime
+
+source = 'https://www.itukama.lk/'
 
 # Execution time
 time = datetime.now().isoformat()
 
 # Get fund value
-source = 'https://www.itukama.lk/'
 pageContent = requests.get(source)
 tree = html.fromstring(pageContent.content)
 fundVal = tree.xpath('string(/html/body/div[1]/div[2]/section[1]/div/div[2]/div[1]/div/div[1]/span/i/text())')
