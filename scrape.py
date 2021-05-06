@@ -7,9 +7,9 @@ from datetime import datetime, timezone
 time = datetime.now().isoformat()
 
 # Get fund value
-pageContent=requests.get('https://www.presidentsoffice.gov.lk/index.php/covid-19-fund/')
+pageContent=requests.get('https://www.itukama.lk/')
 tree = html.fromstring(pageContent.content)
-fundVal = tree.xpath('string(/html/body/div[3]/div/div/article/div/div/div[2]/div/div[2]/div/div[1]/h1/text())')
+fundVal = tree.xpath('string(/html/body/div[1]/div[2]/section[1]/div/div[2]/div[1]/div/div[1]/span/i/text())')
 print('Fund value was LKR ', fundVal)
 
 with open('data.json', 'r+') as persistentFile:
