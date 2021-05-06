@@ -3,7 +3,5 @@
 
 Periodically updates [this file](https://damianperera.github.io/sl-covid-fund/data.json) with the history of the amount of donations in the _COVID – 19 Healthcare and Social Security Fund_ bank account at a given point in time as reflected on the [Itukama](https://www.itukama.lk/) webpage. The script will only save the latest fund value if there is a difference with the last recorded value.
 
-<hr>
-
 ### Disclaimer
 This operates on the assumption that the fund value displayed on the [Itukama](https://www.itukama.lk/) webpage is updated regularly.
