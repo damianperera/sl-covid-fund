@@ -4,7 +4,7 @@ on:
     branches:
       - main
   schedule:
-    - cron:  '*/60 * * * *'
+    - cron:  '0 */12 * * *'
 
 jobs:
   scrape:
