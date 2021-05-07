@@ -1,6 +1,7 @@
 import requests
 from lxml import html
 import json
+import csv
 from datetime import datetime
 
 source = 'https://www.itukama.lk/'
@@ -12,18 +13,19 @@ time = datetime.now().isoformat()
 pageContent = requests.get(source)
 tree = html.fromstring(pageContent.content)
 fundVal = tree.xpath('string(/html/body/div[1]/div[2]/section[1]/div/div[2]/div[1]/div/div[1]/span/i/text())')
+fundVal = float(fundVal.replace(',', ''))
 print('Fund value was LKR ', fundVal)
+
+# Build latest data
+data = {}
+data['time'] = time
+data['value'] = fundVal
+data['source'] = source
 
 with open('data.json', 'r+') as persistentFile:
 	# Load historical data
 	historicalData = json.load(persistentFile)
 	historicalData['lastUpdated'] = time
-	
-	# Build latest data
-	data = {}
-	data['value'] = fundVal
-	data['source'] = source
-	data['time'] = time
 
 	if not 'history' in historicalData:
 		historicalData['history'] = []
@@ -35,3 +37,7 @@ with open('data.json', 'r+') as persistentFile:
 	persistentFile.seek(0)
 	json.dump(historicalData, persistentFile)
 	persistentFile.truncate()
+
+with open("data.csv", mode='a+', newline='') as csvFile:
+	writer = csv.DictWriter(csvFile, data.keys())
+	writer.writerow(data)
