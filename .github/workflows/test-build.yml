@@ -1,8 +1,5 @@
 name: Python Test Build
 on:
-  pull_request:
-    branches:
-      - main
   push:
     branches-ignore:
       - main
