@@ -35,3 +35,7 @@ jobs:
        run: pip install -r requirements.txt
      - name: Scrape
        run: python scrape.py
+     - uses: actions/upload-artifact@v2
+       with:
+        name: Output JSON
+        path: data.json
