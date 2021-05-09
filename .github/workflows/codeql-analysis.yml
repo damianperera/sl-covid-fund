@@ -12,7 +12,10 @@
 name: "CodeQL"
 
 on:
-  push: # All branches
+  push:
+    branches-ignore:
+      - gh-pages
+    
   schedule:
     - cron: '32 1 * * 1'
 
