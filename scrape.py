@@ -44,6 +44,7 @@ donationData['lastDonatedAmount'] = getLastDonatedAmount()
 donationData['lastDonatedAt'] = getLastDonatedAt()
 donationData['lastDonatedBy'] = getLastDonatedBy()
 donationData['lastUpdated'] = time
+donationData['source'] = donationsSource
 print('Donatins: ', donationData)
 
 with open('data.json', 'r+') as persistentFile:
