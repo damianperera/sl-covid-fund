@@ -14,6 +14,11 @@ donationsSource = 'https://www.itukama.lk/donate-now/'
 donationsContent = requests.get(donationsSource)
 donationsTree = html.fromstring(donationsContent.content)
 
+# enhancement: scrape both webpages asynchronously
+
+def getFundValue():
+	return fundTree.xpath('string(//*[contains(@class, "donate-fill")]/span/i/text())')
+
 def getLastDonatedAt():
 	arr = donationsTree.xpath('string(//*[@id="donated-list"]/tbody/tr[1]/td[1]/text())').split(' ')
 	return ' '.join([arr[-3], arr[-2], arr[-1]])
@@ -22,13 +27,10 @@ def getLastDonatedBy():
 	return donationsTree.xpath('string(//*[@id="donated-list"]/tbody/tr[1]/td[1]/text())').split()[0]
 
 def getDonationCount():
-	return donationsTree.xpath('string(/html/body/div[1]/div[2]/section[2]/div/div/div[2]/div[4]/div/h3/span/text())')
+	return donationsTree.xpath('string(//*[@class="donator-count"]/span/text())')
 
 def getLastDonatedAmount():
 	return donationsTree.xpath('string(//*[@id="donated-list"]/tbody/tr[1]/td[2]/text())')
-
-def getFundValue():
-	return fundTree.xpath('string(/html/body/div[1]/div[2]/section[1]/div/div[2]/div[1]/div/div[1]/span/i/text())')
 
 def getDonations():
         return list(map(int, [val.replace(',','') for val in donationsTree.xpath('//*[@id="donated-list"]/tbody//td[2]/text()')]))
@@ -44,14 +46,14 @@ print('Fund: ', fundData)
 donationData = {}
 donationData['count'] = getDonationCount()
 donationData['lastDonatedAmount'] = getLastDonatedAmount()
-donationData['lastDonatedAt'] = getLastDonatedAt()
+donationData['lastDonatedAt'] = getLastDonatedAt() # enhancement: change to ISO 8601 format
 donationData['lastDonatedBy'] = getLastDonatedBy()
-donationData['totalPublicDonations'] = f'{(sum(getDonations())):,}'
+donationData['totalPublicDonationAmount'] = f'{(sum(getDonations())):,}' # formats int to currency string
 donationData['lastUpdated'] = time
 donationData['source'] = donationsSource
 print('Donations: ', donationData)
 
-with open('data.json', 'r+') as persistentFile:
+with open('data.json', 'r+') as persistentFile: # enhancement: add support for CSV
 	# Load historical data
 	historicalData = json.load(persistentFile)
 	historicalData['lastUpdated'] = time
