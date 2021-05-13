@@ -30,6 +30,9 @@ def getLastDonatedAmount():
 def getFundValue():
 	return fundTree.xpath('string(/html/body/div[1]/div[2]/section[1]/div/div[2]/div[1]/div/div[1]/span/i/text())')
 
+def getDonations():
+        return list(map(int, [val.replace(',','') for val in donationsTree.xpath('//*[@id="donated-list"]/tbody//td[2]/text()')]))
+
 # Build latest fund data
 fundData = {}
 fundData['value'] = getFundValue()
@@ -43,6 +46,7 @@ donationData['count'] = getDonationCount()
 donationData['lastDonatedAmount'] = getLastDonatedAmount()
 donationData['lastDonatedAt'] = getLastDonatedAt()
 donationData['lastDonatedBy'] = getLastDonatedBy()
+donationData['totalPublicDonations'] = f'{(sum(getDonations())):,}'
 donationData['lastUpdated'] = time
 donationData['source'] = donationsSource
 print('Donatins: ', donationData)
