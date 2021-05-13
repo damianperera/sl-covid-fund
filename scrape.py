@@ -49,7 +49,7 @@ donationData['lastDonatedBy'] = getLastDonatedBy()
 donationData['totalPublicDonations'] = f'{(sum(getDonations())):,}'
 donationData['lastUpdated'] = time
 donationData['source'] = donationsSource
-print('Donatins: ', donationData)
+print('Donations: ', donationData)
 
 with open('data.json', 'r+') as persistentFile:
 	# Load historical data
