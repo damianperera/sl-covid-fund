@@ -41,6 +41,8 @@ jobs:
      - name: Scrape
        run: python scrape.py
      - name: Assemble deployment
+       env:
+        GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
        run: |
         rm -rf .github
         rm scrape.py
