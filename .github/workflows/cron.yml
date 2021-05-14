@@ -45,6 +45,7 @@ jobs:
         rm -rf .github
         rm scrape.py
         rm requirements.txt
+        printf "google_analytics: %s" $GOOGLE_ANALYTICS_KEY >> _config.yml
      - name: Commit changes
        run: |
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
