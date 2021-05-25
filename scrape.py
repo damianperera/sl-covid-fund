@@ -46,7 +46,7 @@ print('Fund: ', fundData)
 donationData = {}
 donationData['count'] = getDonationCount()
 donationData['lastDonatedAmount'] = getLastDonatedAmount()
-donationData['lastDonatedAt'] = getLastDonatedAt() # enhancement: change to ISO 8601 format
+# donationData['lastDonatedAt'] = getLastDonatedAt() # enhancement: change to ISO 8601 format
 donationData['lastDonatedBy'] = getLastDonatedBy()
 donationData['totalPublicDonationAmount'] = f'{(sum(getDonations())):,}' # formats int to currency string
 donationData['lastUpdated'] = time
